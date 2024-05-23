@@ -1,3 +1,4 @@
+import Notification from "../../@shared/notification/notification";
 import Product from "./product";
 
 describe("Product unit tests", () => {
@@ -32,5 +33,15 @@ describe("Product unit tests", () => {
     const product = new Product("123", "Product 1", 100);
     product.changePrice(150);
     expect(product.price).toBe(150);
+  });
+
+  it("should check if notification has at laest one error",()=>{
+    const notification =  new Notification();
+    const error={
+      message: "error message",
+      context:     "product",
+    };
+    notification.addError(error);
+    expect(notification.hasErrors()).toBe(true);
   });
 });
