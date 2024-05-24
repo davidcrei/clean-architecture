@@ -21,8 +21,21 @@ describe("Product unit tests", () => {
   });
 
 
+  it("should throw error when name and id is empty", () => {
+    expect(() => {
+      const product = new Product("", "", 100);
+    }).toThrowError("product: Id is required,product: Name is required");
+    
+  });
   
 
+  
+  it("should throw error when id and name and price is empty", () => {
+    expect(() => {
+      const product = new Product("", "", -1);
+    }).toThrowError("product: Id is required,product: Name is required,product: Price must be greater than zero");
+    
+  });
   it("should change name", () => {
     const product = new Product("123", "Product 1", 100);
     product.changeName("Product 2");
@@ -35,6 +48,17 @@ describe("Product unit tests", () => {
     expect(product.price).toBe(150);
   });
 
+  it("should check if notification has at laest one error",()=>{
+    const notification =  new Notification();
+    const error={
+      message: "error message",
+      context:     "product",
+    };
+    notification.addError(error);
+    expect(notification.hasErrors()).toBe(true);
+  });
+
+  
   it("should check if notification has at laest one error",()=>{
     const notification =  new Notification();
     const error={
